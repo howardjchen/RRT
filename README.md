@@ -9,15 +9,17 @@ Be sure to install pygame module
 sudo apt-get install python-pygame
 ```
 ## Usage
-1. Just simply run the command to run RRT
+- Just simply run the command to run RRT
+
 ```
 python rrt.py
 ```
-2. Or you could play with RRT star
+- Or you could play with RRT star
+
 ```
 python rrt_start.py
 ```
-3. You could randomly set the start point and goal in pygame window
+- You could randomly set the start point and goal in pygame window
 ![](https://i.imgur.com/IABYhKc.png)
 
 ## For more detail please visit
