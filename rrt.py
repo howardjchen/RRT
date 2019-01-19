@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Jan 18 16:44:34 2019
 
-@author: sritee
-"""
 
 import math, sys, pygame, random
 from math import *
