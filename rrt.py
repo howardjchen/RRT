@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Jan 18 16:44:34 2019
+
+@author: sritee
+"""
 
 import math, sys, pygame, random
 from math import *
@@ -29,6 +36,8 @@ cyan = 0,180,105
 
 count = 0
 rectObs = []
+
+goal_sample_prob=0.05
 
 def dist(p1,p2):    #distance between two points
     return sqrt((p1[0]-p2[0])*(p1[0]-p2[0])+(p1[1]-p2[1])*(p1[1]-p2[1]))
@@ -66,7 +75,7 @@ def get_random_clear():
 def init_obstacles(configNum):  #initialized the obstacle
     global rectObs
     rectObs = []
-    print("config "+ str(configNum))
+    print(("config "+ str(configNum)))
     if (configNum == 0):
         rectObs.append(pygame.Rect((XDIM / 2.0 - 50, YDIM / 2.0 - 100),(100,200)))
     if (configNum == 1):
@@ -107,7 +116,7 @@ def main():
         elif currentState == 'goalFound':
             currNode = goalNode.parent
             pygame.display.set_caption('Goal Reached')
-            print "Goal Reached"
+            print("Goal Reached")
 
             
             while currNode.parent != None:
@@ -124,6 +133,9 @@ def main():
                 foundNext = False
                 while foundNext == False:
                     rand = get_random_clear()
+                    
+                    if random.uniform(0,1)<goal_sample_prob: #sample goal node with small probability to bias search a bit
+                        rand=goalPoint.point
                     parentNode = nodes[0]
                     for p in nodes:
                         if dist(p.point,rand) <= dist(parentNode.point,rand):
@@ -156,14 +168,14 @@ def main():
                     if initPoseSet == False:
                         nodes = []
                         if collides(e.pos) == False:
-                            print('initiale point set: '+str(e.pos))
+                            print(('initiale point set: '+str(e.pos)))
 
                             initialPoint = Node(e.pos, None)
                             nodes.append(initialPoint) # Start in the center
                             initPoseSet = True
                             pygame.draw.circle(screen, red, initialPoint.point, GOAL_RADIUS)
                     elif goalPoseSet == False:
-                        print('goal point set: '+str(e.pos))
+                        print(('goal point set: '+str(e.pos)))
                         if collides(e.pos) == False:
                             goalPoint = Node(e.pos,None)
                             goalPoseSet = True
@@ -182,11 +194,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
-
-
-
-
-
-
-
